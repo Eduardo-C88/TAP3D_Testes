@@ -9,7 +9,20 @@ public class GetTirePoint : MonoBehaviour
     int indexA = 0;
     int indexB = 0;
     public CarController carController;
-    public float minDistanceThreshold = 0.03f; // Minimum distance to add a new point
+    Material mat = null;
+
+    [Header("Tire Mark Settings")]
+    public float markLength = 0.5f;  // Should match _MarkLength in shader
+    public float markWidth = 0.1f;   // Should match _MarkWidth in shader
+    public float overlapFactor = 1.6f; // How much overlap to allow 
+    
+    void Start()
+    {
+        // Get shader values automatically
+        mat = this.gameObject.GetComponent<Renderer>().material;
+        markLength = mat.GetFloat("_MarkLength");
+        markWidth = mat.GetFloat("_MarkWidth");
+    }
 
     void Update()
     {
@@ -53,6 +66,9 @@ public class GetTirePoint : MonoBehaviour
         {
             Vector3 contactPoint = collision.GetContact(0).point;
             Vector3 localContact = transform.InverseTransformPoint(contactPoint);
+
+            // Calculate minimum distance based on tire mark dimensions
+            float minDistance = Mathf.Min(markLength, markWidth) * overlapFactor;
             
             // Check minimum distance from last point
             bool shouldAdd = true;
@@ -60,20 +76,23 @@ public class GetTirePoint : MonoBehaviour
             {
                 Vector3 lastPoint = new Vector3(tirePointsA[indexA-1].x, tirePointsA[indexA-1].y, tirePointsA[indexA-1].z);
                 float distance = Vector3.Distance(localContact, lastPoint);
-                if (distance < minDistanceThreshold) // Minimum distance threshold
+                if (distance < minDistance) // Minimum distance threshold
                     shouldAdd = false;
             }
             
             if (shouldAdd && indexA < tirePointsA.Length)
             {
                 tirePointsA[indexA] = new Vector4(localContact.x, localContact.y, localContact.z, 1.0f);
-                this.gameObject.GetComponent<Renderer>().material.SetVectorArray("_TirePointArrayA", tirePointsA);
+                mat.SetVectorArray("_TirePointArrayA", tirePointsA);
                 indexA++;
             }
         }else if (collision.gameObject.CompareTag("TireB"))
         {
             Vector3 contactPoint = collision.GetContact(0).point;
             Vector3 localContact = transform.InverseTransformPoint(contactPoint);
+
+            // Calculate minimum distance based on tire mark dimensions
+            float minDistance = Mathf.Min(markLength, markWidth) * overlapFactor;
             
             // Check minimum distance from last point
             bool shouldAdd = true;
@@ -81,14 +100,14 @@ public class GetTirePoint : MonoBehaviour
             {
                 Vector3 lastPoint = new Vector3(tirePointsB[indexB-1].x, tirePointsB[indexB-1].y, tirePointsB[indexB-1].z);
                 float distance = Vector3.Distance(localContact, lastPoint);
-                if (distance < minDistanceThreshold) // Minimum distance threshold
+                if (distance < minDistance) // Minimum distance threshold
                     shouldAdd = false;
             }
             
             if (shouldAdd && indexB < tirePointsB.Length)
             {
                 tirePointsB[indexB] = new Vector4(localContact.x, localContact.y, localContact.z, 1.0f);
-                this.gameObject.GetComponent<Renderer>().material.SetVectorArray("_TirePointArrayB", tirePointsB);
+                mat.SetVectorArray("_TirePointArrayB", tirePointsB);
                 indexB++;
             }
         }
