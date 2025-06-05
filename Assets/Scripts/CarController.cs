@@ -10,9 +10,15 @@ public class CarController : MonoBehaviour
     public float maxSpeed = 200f;
     public float brakeStrength = 20f;
     public bool isBraking = false;
+    public bool canMove = true;
 
     void FixedUpdate()
     {
+        if (!canMove)
+        {
+            return; // Skip movement if canMove is false
+        }
+        
         HandleMovement();
     }
 
@@ -30,6 +36,10 @@ public class CarController : MonoBehaviour
             if (velocity > maxSpeed)
             {
                 velocity = maxSpeed; // Cap the speed
+            }
+            if (velocity <= -5)
+            {
+                velocity = -5; // Cap the speed in reverse
             }
         }
 

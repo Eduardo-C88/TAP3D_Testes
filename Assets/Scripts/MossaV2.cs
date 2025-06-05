@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MossaV2 : MonoBehaviour
 {
-    public PrometeoCarController carController;
-    public GameObject car;
+    public CarController carController;
+    public GameObject carBody;
     public Vector4[] pontosEmbate = new Vector4[64];
     public int contador = 0;
+    public float maxImpact = 0.1f; // Threshold to filter minor impacts
+    private float impactForce = 0.02f;
     void Start()
     {
         for (int i = 0; i < pontosEmbate.Length; i++)
@@ -19,7 +21,9 @@ public class MossaV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        car.GetComponent<Renderer>().material.SetFloat("_Impact", carController.carSpeed);
+        impactForce = Mathf.Clamp(carController.velocity, 0, maxImpact);
+        carBody.GetComponent<Renderer>().material.SetFloat("_Radius", impactForce * 0.5f);
+        carBody.GetComponent<Renderer>().material.SetFloat("_Impact", impactForce);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -29,7 +33,9 @@ public class MossaV2 : MonoBehaviour
                                              transform.InverseTransformPoint(collision.GetContact(0).point).y,
                                              transform.InverseTransformPoint(collision.GetContact(0).point).z,
                                              1.0f);
-        car.GetComponent<Renderer>().material.SetVectorArray("_PontoEmbateArray", pontosEmbate);
+        carBody.GetComponent<Renderer>().material.SetVectorArray("_PontoEmbateArray", pontosEmbate);
         contador++;
+
+        carController.canMove = false; // Disable movement on collision
     }
 }

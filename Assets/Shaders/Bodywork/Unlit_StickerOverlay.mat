@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Unlit_StickerOverlay
+  m_Shader: {fileID: 4800000, guid: a0d23a03c45448c4689a5b240cf0ef1f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _CLAMPSTICKER1_ON
+  - _CLAMPSTICKER2_ON
+  - _CLAMPSTICKER3_ON
+  - _CLAMPSTICKER4_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: ebbdaafe7efaa9a4c97f8c8ca1ca66ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StickerTex1:
+        m_Texture: {fileID: 2800000, guid: ad0b1a3d46b2dc74bb0fc4a0d3617e9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StickerTex2:
+        m_Texture: {fileID: 2800000, guid: ad0b1a3d46b2dc74bb0fc4a0d3617e9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StickerTex3:
+        m_Texture: {fileID: 2800000, guid: ad0b1a3d46b2dc74bb0fc4a0d3617e9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StickerTex4:
+        m_Texture: {fileID: 2800000, guid: ad0b1a3d46b2dc74bb0fc4a0d3617e9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BlendMode: 0
+    - _ClampSticker1: 1
+    - _ClampSticker2: 1
+    - _ClampSticker3: 1
+    - _ClampSticker4: 1
+    - _StickerOpacity1: 1
+    - _StickerOpacity2: 1
+    - _StickerOpacity3: 1
+    - _StickerOpacity4: 0.36
+    - _StickerUVRotation1: 0
+    - _StickerUVRotation2: 0.66
+    - _StickerUVRotation3: 1.5
+    - _StickerUVRotation4: 0
+    - _StickerUVScale1: 0.25
+    - _StickerUVScale2: 0.13
+    - _StickerUVScale3: 0.59
+    - _StickerUVScale4: 0.5
+    m_Colors:
+    - _StickerColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _StickerColor2: {r: 1, g: 1, b: 1, a: 1}
+    - _StickerColor3: {r: 1, g: 1, b: 1, a: 1}
+    - _StickerColor4: {r: 1, g: 1, b: 1, a: 1}
+    - _StickerUVCenter1: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _StickerUVCenter2: {r: 0.39, g: 0.5, b: 0, a: 0}
+    - _StickerUVCenter3: {r: 0.99, g: 0.32, b: 0, a: 0}
+    - _StickerUVCenter4: {r: 0.39, g: 0.83, b: 0, a: 0}
+  m_BuildTextureStacks: []
